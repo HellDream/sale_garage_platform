@@ -69,7 +69,11 @@ class _SalePlatformScreenState extends State<SalePlatformScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, PostScreen.id);
+          Navigator.pushNamed(context, PostScreen.id).whenComplete((){
+            setState(() {
+              pages[0] = ShowListScreen();
+            });
+          });
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
