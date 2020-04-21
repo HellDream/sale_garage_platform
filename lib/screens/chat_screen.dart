@@ -3,6 +3,7 @@ import 'package:sale_garage_platform/components/circle_avatar.dart';
 import 'package:sale_garage_platform/components/item_tile.dart';
 import 'package:sale_garage_platform/components/message_stream.dart';
 import 'package:sale_garage_platform/components/text_input_widget.dart';
+import 'package:sale_garage_platform/components/user_app_bar_title.dart';
 import 'package:sale_garage_platform/constants/constant.dart';
 import 'package:sale_garage_platform/models/item.dart';
 import 'package:sale_garage_platform/models/message.dart';
@@ -24,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   TextEditingController _txtController;
   bool _showItem = true;
   Item item;
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +39,6 @@ class _ChatScreenState extends State<ChatScreen> {
     _txtController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,21 +59,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 .pop(await chatService.getLatestMessage(chatRoomId));
           },
         ),
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            UserCircleAvatar(
-              imageURL: widget.owner.photoURL,
-              size: 40.0,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              widget.owner.displayName,
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-          ],
+        title: UserAppBarTitle(
+          owner: widget.owner,
         ),
       ),
       body: Column(

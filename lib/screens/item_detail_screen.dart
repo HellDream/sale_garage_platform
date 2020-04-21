@@ -8,6 +8,7 @@ import 'package:sale_garage_platform/constants/widget_constants.dart';
 import 'package:sale_garage_platform/models/item.dart';
 import 'package:sale_garage_platform/models/owner.dart';
 import 'package:sale_garage_platform/screens/chat_screen.dart';
+import 'package:sale_garage_platform/screens/owner_posts_Screen.dart';
 
 class ItemDetailScreen extends StatelessWidget {
   final Item item;
@@ -99,9 +100,21 @@ class ItemDetailScreen extends StatelessWidget {
       return SizedBox();
     }
     return ListTile(
-      leading: UserCircleAvatar(
-        imageURL: owner.photoURL,
-        size: 50.0,
+      leading: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => OwnerPostScreen(
+                owner: owner,
+              ),
+            ),
+          );
+        },
+        child: UserCircleAvatar(
+          imageURL: owner.photoURL,
+          size: 50.0,
+        ),
       ),
       title: Text(owner.displayName),
       subtitle: Text('contact: ${owner.email}'),
