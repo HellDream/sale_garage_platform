@@ -13,6 +13,8 @@
         android:name="cuijialiu.zhenyuye.sale_garage_platform.Application"
         android:label="sale_garage_platform"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBVsLpJkkiIo7sKBT_cfb4OIi_jkl92WOI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

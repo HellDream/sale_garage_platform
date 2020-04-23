@@ -8,6 +8,7 @@ import 'package:sale_garage_platform/constants/widget_constants.dart';
 import 'package:sale_garage_platform/models/item.dart';
 import 'package:sale_garage_platform/models/owner.dart';
 import 'package:sale_garage_platform/screens/chat_screen.dart';
+import 'package:sale_garage_platform/screens/item_map_screen.dart';
 import 'package:sale_garage_platform/screens/owner_posts_Screen.dart';
 
 class ItemDetailScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class ItemDetailScreen extends StatelessWidget {
           children: <Widget>[
             _buildImageSection(images),
             _buildTitleSection(),
-            _buildPriceSection(),
+            _buildPriceSection(context),
             _buildOwnerInfo(context),
             Divider(
               thickness: 10,
@@ -140,19 +141,24 @@ class ItemDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceSection() {
+  Widget _buildPriceSection(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(32, 15, 32, 5),
-      child: Container(
-//        padding: const EdgeInsets.only(bottom: 8),
-        child: Text(
-          formatter.format(item.price),
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 22,
-            color: Colors.red,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: Text(
+              formatter.format(item.price),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 22,
+                color: Colors.red,
+              ),
+            ),
           ),
-        ),
+          _getLocationIcon(context),
+        ],
       ),
     );
   }
@@ -165,5 +171,26 @@ class ItemDetailScreen extends StatelessWidget {
         softWrap: true,
       ),
     );
+  }
+
+  Widget _getLocationIcon(BuildContext context) {
+    return item.location == null
+        ? SizedBox()
+        : InkWell(
+            child: Icon(
+              Icons.location_on,
+              color: Colors.grey.shade700,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => ItemMapScreen(
+                    geoPoint: item.location,
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

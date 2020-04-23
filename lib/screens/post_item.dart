@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:location/location.dart';
 import 'package:sale_garage_platform/constants/constant.dart';
 import 'package:sale_garage_platform/models/item.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -23,6 +25,7 @@ class _PostScreenState extends State<PostScreen> {
   bool isSave = false;
   bool _saving = false;
   bool _validate = false;
+  bool _shareLocation = false;
 
   Future _getImage() async {
     List<Asset> images = await MultiImagePicker.pickImages(
@@ -130,8 +133,10 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   Future<void> _onSaveItem() async {
+    GeoFirePoint geo = await getGeoPoint();
     Item item = Item(
-        title: _title, description: _description, price: _price, images: []);
+        title: _title, description: _description, price: _price, images: [], location: geo);
+    print(item.toJson());
     await item.addImage(_images);
     await postService.createPost(item);
     setState(() {
@@ -181,6 +186,19 @@ class _PostScreenState extends State<PostScreen> {
               });
             },
           ),
+          Row(
+            children: <Widget>[
+              Text("Share Location?"),
+              Switch(
+                onChanged: (bool value) {
+                  setState(() {
+                    _shareLocation = value;
+                  });
+                },
+                value: _shareLocation,
+              ),
+            ],
+          ),
           TextField(
             keyboardType: TextInputType.multiline,
             maxLines: null,
@@ -197,5 +215,13 @@ class _PostScreenState extends State<PostScreen> {
         ],
       ),
     );
+  }
+
+  Future<GeoFirePoint> getGeoPoint() async {
+    if(_shareLocation){
+      LocationData data = await locationService.getLocation();
+      return GeoFirePoint(data.latitude, data.longitude);
+    }
+    return null;
   }
 }
