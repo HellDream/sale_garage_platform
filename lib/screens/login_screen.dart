@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:sale_garage_platform/components/logo.dart';
 import 'package:sale_garage_platform/constants/constant.dart';
 import 'package:sale_garage_platform/screens/sale_platform_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -17,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                FlutterLogo(size: 150),
+//                FlutterLogo(size: 150),
+                Logo(
+                  size: 250,
+                ),
                 SizedBox(height: 50),
                 _signInButton(),
               ],

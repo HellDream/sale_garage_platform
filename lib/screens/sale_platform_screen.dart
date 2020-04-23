@@ -33,7 +33,7 @@ class _SalePlatformScreenState extends State<SalePlatformScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Sale Garage Platform',
+          'Garage Sale Platform',
         ),
         actions: <Widget>[
           _buildMsgButton(data.receiveMsg)
