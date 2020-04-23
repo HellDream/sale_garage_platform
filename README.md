@@ -9,7 +9,7 @@ Jialiu Cui (001393004): In charge of the database design, authentication, item p
 
 ## Introduction
 
-This is the final project of **Zhenyu Ye 001306083** & **Jialiu Cui ** for INFO6350 class 2020 spring. This is an app designed for users to quickly post, view items they want to buy or sell, and message each other on the items they are interested in just like a typical garage sale. We used flutter and firebase in this project.  
+This is the final project of **Zhenyu Ye 001306083** & **Jialiu Cui 001393004** for INFO6350 class 2020 spring. This is an app designed for users to quickly post, view items they want to buy or sell, and message each other on the items they are interested in just like a typical garage sale. We used flutter and firebase in this project.  
 
 ### Demo
 
